@@ -1,11 +1,40 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import img from '../assets/hero-background.jpg';
+import MisionVision from '../components/MisionVision.astro';
+import NuestrosValores from '../components/NuestrosValores.astro';
+import Servicios from '../components/Servicios.astro';
+import Banner from '../components/Banner.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<Header
+      title="Tu Futuro Digital Comienza Aquí"
+      subtitle="Creamos experiencias web impactantes y de alto rendimiento para tu negocio."
+      ctaText="Servicios"
+      ctaLink="/servicios"
+      imageUrl={img.src}
+    />
+	<MisionVision
+	  misionTitle="Nuestra Misión"
+	  misionText="Impulsar la transformación digital de las empresas mediante soluciones web innovadoras, personalizadas y de alta calidad que generen valor y crecimiento sostenible."
+	  visionTitle="Nuestra Visión"
+	  visionText="Ser reconocidos como líderes en el desarrollo web, destacándonos por nuestra creatividad, excelencia técnica y compromiso con el éxito de nuestros clientes a nivel global."
+	/>
+	<NuestrosValores
+	  title="Principios que Guían Cada Proyecto de Lujo"
+	/>
+	<Servicios
+	  title="Servicios Exclusivos para Marcas de Alto Nivel"
+	  subtitle="Soluciones Digitales a la Medida de tu Éxito"
+	/>
+	<Banner
+		message="Descubre nuestra nueva línea de servicios premium para el Q4. ¡La excelencia te espera!"
+		linkText="Solicitar Acceso"
+		linkUrl="/contacto-premium"
+		type="accent"
+	/>
 </Layout>

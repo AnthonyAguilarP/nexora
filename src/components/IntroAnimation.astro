@@ -1,0 +1,100 @@
+<div id="intro-overlay" aria-hidden="true">
+  <div class="dollar-sign-container">
+    <span class="dollar-sign">$</span>
+  </div>
+</div>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+  }
+  #intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
+    pointer-events: all;
+  }
+  #intro-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .dollar-sign-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 0 rgba(207, 163, 86, 0.4); 
+    border-radius: 50%;
+    animation: pulseBorder 2s infinite alternate, scaleIn 1s ease-out forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+  .dollar-sign {
+    font-family: 'Georgia', serif;
+    font-size: 5rem;
+    color: var(--color-accent);
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInScaleUpDollar 1s ease-out forwards;
+    animation-delay: 1.2s;
+  }
+  @keyframes pulseBorder {
+    0% {
+      box-shadow: 0 0 0 0 rgba(207, 163, 86, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 0 20px rgba(207, 163, 86, 0);
+    }
+  }
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes fadeInScaleUpDollar {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const introOverlay = document.getElementById('intro-overlay');
+    if (introOverlay) {
+      const totalAnimationDuration = 1200 + 1000 + 1000;
+      
+      setTimeout(() => {
+        introOverlay.classList.add('fade-out');
+        introOverlay.addEventListener('transitionend', () => {
+          introOverlay.remove();
+        });
+      }, totalAnimationDuration); 
+    }
+  });
+</script>

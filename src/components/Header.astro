@@ -1,0 +1,172 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink: string;
+  imageUrl?: string;
+  videoUrl?: string;
+}
+
+const { title, subtitle, ctaText, ctaLink, imageUrl, videoUrl } = Astro.props;
+
+const backgroundStyle = !videoUrl && imageUrl 
+  ? `background-image: url('${imageUrl}');` 
+  : ''; 
+
+const sectionClasses = ["hero-section"];
+if (imageUrl && !videoUrl) {
+    sectionClasses.push('has-image-bg');
+}
+---
+
+<section 
+  class={sectionClasses.join(' ')} 
+  style={backgroundStyle} 
+>
+  {videoUrl && (
+    <video
+      class="hero-background-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+      poster={imageUrl}
+    >
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  )}
+
+  <div class="hero-content">
+    <h1 class="hero-title">
+      {title}
+    </h1>
+    <p class="hero-subtitle">
+      {subtitle}
+    </p>
+    <a href={ctaLink} class="hero-cta-button">
+      {ctaText}
+    </a>
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A;
+    --color-accent: #CFA356;
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+  }
+  .hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-text-light);
+    overflow: hidden; 
+    background-color: var(--color-bg-primary);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75); 
+    z-index: 1;
+  }
+  .hero-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2; 
+    max-width: 900px; 
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    color: var(--color-accent);
+    opacity: 0;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.2s; 
+  }
+  .hero-subtitle {
+    font-size: 1.2rem; 
+    margin-bottom: 3rem;
+    font-weight: 400;
+    color: var(--color-text-subtle);
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.5s; 
+  }
+  .hero-cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    border: 2px solid var(--color-accent);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(207, 163, 86, 0.3);
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+    animation-delay: 0.8s; 
+  }
+  .hero-cta-button:hover {
+    background-color: transparent;
+    color: var(--color-accent);
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 15px rgba(207, 163, 86, 0.5);
+  }
+  @keyframes fadeInSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @media (min-width: 768px) {
+    .hero-section {
+      min-height: 100vh;
+    }
+    .hero-title {
+      font-size: 5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.5rem; 
+    }
+  }
+</style>

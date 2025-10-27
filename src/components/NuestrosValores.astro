@@ -1,0 +1,135 @@
+---
+interface ValueItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const defaultValues: ValueItem[] = [
+  {
+    icon: '💎',
+    title: 'Excelencia Impecable',
+    description: 'La calidad superior es nuestra única medida. Cada solución está diseñada y ejecutada con una atención al detalle inigualable.',
+  },
+  {
+    icon: '🤝',
+    title: 'Transparencia Absoluta',
+    description: 'Fomentamos relaciones basadas en la honestidad total y la comunicación abierta en cada etapa del proyecto.',
+  },
+  {
+    icon: '💡',
+    title: 'Innovación Constante',
+    description: 'Nos dedicamos a integrar las últimas tecnologías y estrategias para asegurar que su marca se mantenga a la vanguardia.',
+  },
+  {
+    icon: '🔒',
+    title: 'Discreción Garantizada',
+    description: 'Manejamos la información de nuestros clientes con la máxima confidencialidad y respeto, acorde a los estándares de lujo.',
+  },
+];
+
+interface Props {
+  title: string;
+  values?: ValueItem[];
+}
+
+const { title, values = defaultValues } = Astro.props;
+---
+
+<section class="values-section">
+  <div class="header-content">
+    <p class="subtitle">Nuestros Pilares</p>
+    <h2 class="section-title">{title}</h2>
+  </div>
+
+  <div class="values-grid">
+    {values.map((value) => (
+      <div class="value-card">
+        <span class="value-icon">{value.icon}</span>
+        <h3 class="value-title">{value.title}</h3>
+        <p class="value-description">{value.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+    --color-card-bg: #141414; 
+  }
+  .values-section {
+    background-color: var(--color-bg-primary);
+    padding: 6rem 1.5rem;
+    text-align: center;
+  }
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+  .subtitle {
+    color: var(--color-accent);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-text-light);
+    line-height: 1.1;
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .value-card {
+    background-color: var(--color-card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: left;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border-left: 4px solid transparent;
+  }
+  .value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(207, 163, 86, 0.2); 
+    border-left: 4px solid var(--color-accent);
+  }
+  .value-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+  }
+  .value-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+  }
+  .value-description {
+    font-size: 1rem;
+    color: var(--color-text-subtle);
+  }
+  @media (min-width: 600px) {
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .values-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .section-title {
+      font-size: 3.5rem;
+    }
+  }
+</style>

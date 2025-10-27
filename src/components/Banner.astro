@@ -1,0 +1,111 @@
+---
+interface Props {
+  message: string;
+  linkText?: string;
+  linkUrl?: string;
+  type?: 'default' | 'alert' | 'accent';
+}
+
+const { 
+    message, 
+    linkText = 'Ver más', 
+    linkUrl, 
+    type = 'accent' 
+} = Astro.props;
+
+let bannerBg = 'var(--color-card-bg)';
+let bannerColor = 'var(--color-text-light)';
+let bannerLinkColor = 'var(--color-accent)';
+
+if (type === 'accent') {
+    bannerBg = '#1f1f1f';
+    bannerColor = 'var(--color-text-light)';
+    bannerLinkColor = 'var(--color-accent)';
+} else if (type === 'alert') {
+    bannerBg = '#3D0000';
+    bannerColor = '#FFDADA';
+    bannerLinkColor = '#FF9999';
+}
+
+const bannerStyle = `
+    background-color: ${bannerBg};
+    color: ${bannerColor};
+`;
+---
+
+<div class="custom-banner" style={bannerStyle}>
+  <div class="banner-content-wrapper">
+    <p class="banner-message">
+      {message}
+    </p>
+    {linkUrl && (
+      <a 
+        href={linkUrl} 
+        class="banner-link" 
+        style={`color: ${bannerLinkColor}; border-color: ${bannerLinkColor};`}
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        {linkText}
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+  :root {
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-card-bg: #141414; 
+  }
+  .custom-banner {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .banner-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .banner-message {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .banner-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 2px solid;
+    transition: all 0.3s ease;
+  }
+  .banner-link:hover {
+    letter-spacing: 0.15em;
+    opacity: 0.8;
+  }
+  .arrow {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  .banner-link:hover .arrow {
+    transform: translateX(3px);
+  }
+  @media (min-width: 768px) {
+    .banner-content-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1.5rem; 
+    }
+  }
+</style>

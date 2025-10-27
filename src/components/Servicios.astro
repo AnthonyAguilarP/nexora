@@ -1,0 +1,198 @@
+---
+interface ServiceItem {
+  number: string;
+  title: string;
+  excerpt: string;
+  link: string;
+}
+
+const defaultServices: ServiceItem[] = [
+  {
+    number: "01",
+    title: "Branding Estratégico & Visual",
+    excerpt: "Desarrollamos identidades de marca atemporales que resuenan con la exclusividad, desde la narrativa hasta la ejecución visual.",
+    link: "/servicios/branding"
+  },
+  {
+    number: "02",
+    title: "Diseño Web de Alto Rendimiento",
+    excerpt: "Sitios web personalizados y optimizados con Astro. Rendimiento impecable, velocidad superior y diseño vanguardista, esenciales para la experiencia de lujo.",
+    link: "/servicios/diseno-web"
+  },
+  {
+    number: "03",
+    title: "Optimización UX/UI Exclusiva",
+    excerpt: "Garantizamos una experiencia de usuario fluida e intuitiva, asegurando que la navegación refleje la sofisticación de sus servicios.",
+    link: "/servicios/ux-ui"
+  },
+  {
+    number: "04",
+    title: "Marketing de Contenido Premium",
+    excerpt: "Estrategias de contenido que posicionan su marca como líder intelectual en su nicho, atrayendo a una audiencia de alto valor.",
+    link: "/servicios/marketing"
+  }
+];
+
+interface Props {
+  title: string;
+  subtitle: string;
+  services?: ServiceItem[];
+}
+
+const { title, subtitle, services = defaultServices } = Astro.props;
+---
+
+<section class="services-section">
+  <div class="header-content">
+    <p class="section-subtitle">{subtitle}</p>
+    <h2 class="section-title">{title}</h2>
+  </div>
+
+  <div class="services-grid">
+    {services.map((service) => (
+      <a href={service.link} class="service-card" aria-label={`Conocer más sobre ${service.title}`}>
+        <div class="service-content-wrapper">
+          <div class="service-number">{service.number}</div>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-excerpt">{service.excerpt}</p>
+          <span class="read-more">Explorar Servicio →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+    --color-card-bg: #141414; 
+  }
+  .services-section {
+    background-color: var(--color-bg-primary);
+    padding: 6rem 1.5rem; 
+    text-align: center;
+  }
+  .header-content {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+  }
+  .section-subtitle {
+    color: var(--color-accent);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 2.5rem; 
+    font-weight: 300;
+    color: var(--color-text-light);
+    line-height: 1.1;
+  }
+  .services-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+  }
+  .service-card {
+    display: block; 
+    background-color: var(--color-card-bg);
+    padding: 2.5rem;
+    text-align: left;
+    text-decoration: none;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1f1f1f; 
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: transform 0.5s ease-in-out;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .service-card:hover::before {
+    transform: translateX(200%) skewX(-20deg);
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; 
+    height: 3px;
+    background: var(--color-accent);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    border-color: #333;
+  }
+  .service-card:hover::after {
+    width: 100%; 
+  }
+  .service-content-wrapper {
+      position: relative;
+      z-index: 3;
+  }
+  .service-number {
+    font-size: 2.5rem;
+    font-weight: 200; 
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .service-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+  }
+  .service-excerpt {
+    font-size: 1rem;
+    color: var(--color-text-subtle);
+    margin-bottom: 1.5rem;
+  }
+  .read-more {
+    display: block;
+    color: var(--color-accent);
+    font-weight: 600;
+    transition: letter-spacing 0.3s ease;
+  }
+  .service-card:hover .read-more {
+    letter-spacing: 0.05em; 
+  }
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .section-title {
+      font-size: 3.5rem;
+    }
+  }
+  @media (min-width: 1200px) {
+     .services-grid {
+      grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+</style>

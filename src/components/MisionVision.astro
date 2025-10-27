@@ -1,0 +1,96 @@
+---
+interface Props {
+  misionTitle: string;
+  misionText: string;
+  visionTitle: string;
+  visionText: string;
+}
+
+const { misionTitle, misionText, visionTitle, visionText } = Astro.props;
+---
+
+<section class="mision-vision-section">
+  <div class="container">
+    <div class="card-item">
+      <h2 class="card-title">{misionTitle}</h2>
+      <p class="card-text">{misionText}</p>
+      <span class="icon" aria-hidden="true">🎯</span>
+    </div>
+
+    <div class="card-item">
+      <h2 class="card-title">{visionTitle}</h2>
+      <p class="card-text">{visionText}</p>
+      <span class="icon" aria-hidden="true">💡</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+    --color-card-bg: #141414;
+  }
+  .mision-vision-section {
+    background-color: var(--color-bg-primary);
+    padding: 4rem 1.5rem;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .card-item {
+    background-color: var(--color-card-bg);
+    padding: 2.5rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-card-bg);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .card-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent); 
+  }
+  .card-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+  .card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-subtle);
+    max-width: 90%;
+  }
+  .icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 3rem;
+    opacity: 0.1;
+    color: var(--color-accent);
+  }
+  @media (min-width: 768px) {
+    .container {
+      flex-direction: row;
+    }
+    .card-item {
+      flex: 1;
+      padding: 3rem;
+    }
+    .card-title {
+      font-size: 2rem;
+    }
+  }
+</style>
