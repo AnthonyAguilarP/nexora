@@ -1,0 +1,145 @@
+---
+interface SocialLink {
+  icon: string;
+  label: string;
+  href: string;
+}
+
+interface Props {
+  siteName?: string;
+  description?: string;
+  links?: { label: string; href: string }[];
+  socials?: SocialLink[];
+}
+
+const {
+  siteName = "Nexora",
+  description = "Creamos experiencias digitales de lujo donde la estética se encuentra con la estrategia.",
+  links = [
+    { label: "Inicio", href: "/" },
+    { label: "Servicios", href: "/servicios" },
+    { label: "Contacto", href: "/contacto" },
+  ],
+  socials = [
+    { icon: "mdi:instagram", label: "Instagram", href: "https://instagram.com" },
+    { icon: "mdi:linkedin", label: "LinkedIn", href: "https://linkedin.com" },
+    { icon: "mdi:twitter", label: "Twitter", href: "https://twitter.com" },
+  ]
+} = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+        <div class="footer-brand">
+        <h3 class="footer-title">{siteName}</h3>
+        <p class="footer-description">{description}</p>
+        </div>
+
+        <div class="footer-links">
+        {links.map(link => (
+            <a href={link.href} class="footer-link">{link.label}</a>
+        ))}
+        </div>
+
+        <div class="footer-socials">
+        {socials.map(social => (
+            <a href={social.href} aria-label={social.label} class="social-icon" target="_blank" rel="noopener noreferrer">
+            <iconify-icon icon={social.icon}></iconify-icon>
+            </a>
+        ))}
+        </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© {new Date().getFullYear()} {siteName}. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+  }
+  .footer {
+    background: var(--color-bg-primary);
+    color: var(--color-text-light);
+    padding: 4rem 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid #1f1f1f;
+  }
+  .footer-inner {
+    display: grid;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-brand {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .footer-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+  .footer-description {
+    color: var(--color-text-subtle);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+  .footer-link:hover {
+    color: var(--color-accent);
+  }
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .social-icon {
+    color: var(--color-text-subtle);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .social-icon:hover {
+    color: var(--color-accent);
+    transform: translateY(-3px);
+  }
+  .footer-bottom {
+    border-top: 1px solid #1f1f1f;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-subtle);
+  }
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+      text-align: left;
+      align-items: start;
+    }
+    .footer-brand {
+      margin: 0;
+    }
+    .footer-links {
+      justify-content: flex-start;
+    }
+    .footer-socials {
+      justify-content: flex-end;
+    }
+  }
+</style>

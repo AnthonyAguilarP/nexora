@@ -1,0 +1,258 @@
+---
+const email = 'sale.nexora@gmail.com';
+const whatsappNumber = '50589062868';
+const telDisplay = '+505 8906 2868';
+---
+<section class="contact-section" aria-labelledby="contact-heading">
+  <div class="wrap">
+    <div class="left">
+      <p class="eyebrow">Contacto</p>
+      <h2 id="contact-heading" class="title">Hablemos de su próximo proyecto</h2>
+      <p class="lead">
+        Si desea una propuesta, cotización o resolver una duda, escríbanos o llámenos.
+        Ofrecemos atención personalizada basada en sus requisitos para branding, landings, material impreso y más.
+      </p>
+
+      <div class="contact-card" role="group" aria-label="Información de contacto">
+        <div class="contact-line">
+          <div class="icon">✉️</div>
+          <div>
+            <div class="label">Correo</div>
+            <div class="value" id="contact-email">{email}</div>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <div class="icon">📱</div>
+          <div>
+            <div class="label">Teléfono / WhatsApp</div>
+            <div class="value" id="contact-phone">{telDisplay}</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn" id="mailto-btn" aria-label="Enviar correo">
+            Enviar correo
+          </button>
+
+          <button type="button" class="btn ghost" id="copy-email-btn" aria-label="Copiar correo">
+            Copiar email
+          </button>
+
+          <button type="button" class="btn ghost" id="call-btn" aria-label="Llamar">
+            Llamar
+          </button>
+
+          <button
+            type="button"
+            class="btn whatsapp"
+            id="whatsapp-btn"
+            aria-label="Abrir chat de WhatsApp"
+          >
+            WhatsApp
+          </button>
+        </div>
+
+        <p class="note">
+          También puede <a href="/contacto" class="link">contactarnos</a> para enviar archivos o briefs detallados.
+        </p>
+      </div>
+    </div>
+
+    <div class="right" aria-hidden="false">
+      <figure class="illustration" role="img" aria-label="Ilustración de contacto">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#CFA356" stop-opacity="0.14"/>
+              <stop offset="1" stop-color="#CFA356" stop-opacity="0.04"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="600" height="400" rx="16" fill="#071017"/>
+          <g transform="translate(40,40)">
+            <rect x="0" y="0" width="340" height="220" rx="12" fill="rgba(255,255,255,0.02)" stroke="#111" />
+            <path d="M20 40h300v2H20z" fill="url(#g1)"/>
+            <rect x="20" y="60" width="160" height="12" rx="6" fill="#ddd" opacity="0.06"/>
+            <rect x="20" y="86" width="280" height="10" rx="5" fill="#ddd" opacity="0.04"/>
+            <rect x="20" y="110" width="240" height="10" rx="5" fill="#ddd" opacity="0.04"/>
+            <g transform="translate(200,140)">
+              <rect x="0" y="0" width="120" height="56" rx="8" fill="#0b0b0b" stroke="#141414"/>
+              <text x="12" y="34" fill="#CFA356" font-size="14" font-family="Arial,Helvetica,sans-serif">Nexora</text>
+            </g>
+            <g transform="translate(260, -10) rotate(6)">
+              <circle cx="40" cy="40" r="40" fill="rgba(207,163,86,0.08)"/>
+              <path d="M20 48 L36 64 L68 28" stroke="#CFA356" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <small>Atendemos por correo y WhatsApp (+505 8906 2868). Si desea que prioricemos llamadas, indíquelo al escribir.</small>
+  </div>
+
+  <style>
+    :root{
+      --bg: #0A0A0A;
+      --card: #131313;
+      --accent: #CFA356;
+      --text: #EFEFEF;
+      --muted: #A8A8A8;
+      --glass: rgba(255,255,255,0.02);
+    }
+
+    .contact-section{
+      background: var(--bg);
+      color: var(--text);
+      padding: 3.5rem 1.25rem;
+      border-top: 1px solid #151515;
+      margin-top: 10vh;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+
+    .eyebrow{
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title{
+      font-size: 2rem;
+      margin: 0 0 0.75rem 0;
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .lead{
+      color: var(--muted);
+      max-width: 56ch;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-card{
+      background: var(--card);
+      border: 1px solid #181818;
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      max-width: 680px;
+    }
+
+    .contact-line{
+      display:flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .icon{
+      width:48px;
+      height:48px;
+      border-radius: 8px;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      background: linear-gradient(180deg, rgba(207,163,86,0.12), rgba(207,163,86,0.04));
+      color: var(--accent);
+      border: 1px solid rgba(207,163,86,0.08);
+    }
+
+    .label{ font-size:0.8rem; color:var(--muted); }
+    .value{ font-size:1rem; color:var(--text); font-weight:500; word-break:break-all; }
+
+    .actions{
+      display:flex;
+      gap:0.6rem;
+      margin-top: 0.4rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      font-weight:600;
+      cursor:pointer;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+
+    .btn:hover{ transform: translateY(-3px); }
+    .btn.ghost{
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid #232323;
+    }
+
+    .btn.whatsapp{
+      background: linear-gradient(90deg, rgba(37,211,102,0.12), rgba(37,211,102,0.04));
+      color: var(--text);
+      border: 1px solid rgba(37,211,102,0.06);
+    }
+
+    .note{ color: var(--muted); margin-top: 0.8rem; font-size:0.9rem; }
+
+    .right{ display:flex; justify-content:center; align-items:center; }
+
+    .illustration{ width:100%; max-width:420px; }
+
+    .footer-note{ margin-top: 1.1rem; color: var(--muted); font-size:0.85rem; text-align:center; }
+
+    @media(min-width:900px){
+      .wrap{ grid-template-columns: 1fr 420px; gap: 3rem; }
+      .footer-note{ text-align:left; }
+    }
+    small {
+        margin-left: 10vw;
+    }
+  </style>
+
+  <script type="module">
+    const email = /*@once*/ document.getElementById('contact-email').textContent.trim();
+    const phone = /*@once*/ document.getElementById('contact-phone').textContent.trim();
+    const mailtoBtn = document.getElementById('mailto-btn');
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const callBtn = document.getElementById('call-btn');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+
+    mailtoBtn.addEventListener('click', () => {
+      const subject = encodeURIComponent('Solicitud de información');
+      const body = encodeURIComponent('Hola — escribo para solicitar información sobre sus servicios.');
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+
+    copyEmailBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        copyEmailBtn.textContent = 'Copiado ✓';
+        setTimeout(()=> copyEmailBtn.textContent = 'Copiar email', 1800);
+      } catch (e) {
+        copyEmailBtn.textContent = 'Copiar (falló)';
+        console.error(e);
+      }
+    });
+
+    callBtn.addEventListener('click', () => {
+      window.location.href = `tel:${'+' + '{countryAndNumber}'.replace('{countryAndNumber}', '50589062868')}`;
+    });
+
+    whatsappBtn.addEventListener('click', () => {
+      const wa = `https://wa.me/${'{waNumber}'.replace('{waNumber}', '${whatsappNumber}')}?text=${encodeURIComponent('Hola, quisiera más información sobre sus servicios.')}`;
+      window.open(wa, '_blank');
+    });
+  </script>
+</section>

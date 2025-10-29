@@ -1,0 +1,251 @@
+---
+import logoPng from '../assets/logo.png';
+export interface Props {
+  siteName?: string;
+  logo?: string;
+  links?: { href: string; label: string }[];
+  cta?: { href: string; label: string } | null;
+}
+const {
+  siteName = 'Nexora',
+  logo = logoPng.src,
+  links = [
+    { href: '/', label: 'Inicio' },
+    { href: '/servicios', label: 'Servicios' },
+    { href: '/contacto', label: 'Contacto' },
+  ],
+} = Astro.props;
+---
+
+<nav class="nexora-navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <a class="brand" href="/">
+      <img src={logo} alt={`${siteName} logo`} class="brand__logo"/>
+      <span class="brand__title">{siteName}</span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nexora-menu" aria-label="Abrir menú">
+      <span class="hamburger"></span>
+    </button>
+
+    <div id="nexora-menu" class="nav-links" data-open="false">
+      <ul>
+        {links.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+<script>
+  (function () {
+    const root = document.querySelector('.nexora-navbar');
+    if (!root) return;
+
+    const btn = root.querySelector('.nav-toggle');
+    const menu = root.querySelector('#nexora-menu');
+
+    if (!(btn instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.dataset.open = String(!open);
+      btn.classList.toggle('is-open', !open);
+    });
+  })();
+</script>
+
+<style>
+  :root {
+    --nexora-black: #070707;
+    --nexora-gold: #D4AF37;
+    --nexora-gold-2: #C9A66B;
+    --text-muted: #c8c8c8;
+  }
+  .nexora-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(7, 7, 7, 0.88);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    transition: background 250ms ease, backdrop-filter 250ms ease;
+  }
+  .nexora-navbar.scrolled {
+    background: rgba(7, 7, 7, 0.95);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  }
+  .nexora-navbar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.8rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .brand__logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(0, 0, 0, 0.1));
+    padding: 6px;
+    transition: transform 220ms ease;
+  }
+  .brand__logo:hover {
+    transform: scale(1.06);
+  }
+  .brand__title {
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--nexora-gold);
+    text-transform: uppercase;
+    font-size: 1rem;
+    background: linear-gradient(90deg, var(--nexora-gold), var(--nexora-gold-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.93rem;
+    letter-spacing: 0.7px;
+    padding: 0.35rem 0.25rem;
+    transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+  }
+  .nav-links a:hover,
+  .nav-links a:focus {
+    color: var(--nexora-gold);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-cta {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.9);
+    background: linear-gradient(180deg, rgba(212,175,55,0.12), rgba(212,175,55,0.06));
+    color: var(--nexora-gold);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6),
+                inset 0 -2px 0 rgba(212, 175, 55, 0.05);
+    transition: background 220ms ease, color 220ms ease, transform 160ms ease;
+  }
+  .btn-cta:hover,
+  .btn-cta:focus {
+    background: linear-gradient(180deg, rgba(212,175,55,0.24), rgba(212,175,55,0.12));
+    color: #070707;
+    transform: translateY(-2px);
+  }
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 8px;
+  }
+  .nav-toggle:focus {
+    outline: 2px solid rgba(212,175,55,0.25);
+  }
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: var(--text-muted);
+    transition: transform 220ms ease, opacity 220ms ease;
+    border-radius: 2px;
+  }
+  .hamburger::before { transform: translateY(-7px); }
+  .hamburger::after  { transform: translateY(5px); }
+  .nav-toggle.is-open .hamburger {
+    background: transparent;
+  }
+  .nav-toggle.is-open .hamburger::before {
+    transform: rotate(45deg) translate(4px, 4px);
+    background: var(--nexora-gold);
+  }
+  .nav-toggle.is-open .hamburger::after {
+    transform: rotate(-45deg) translate(4px, -4px);
+    background: var(--nexora-gold);
+  }
+  @media (max-width: 880px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      background: rgba(7, 7, 7, 0.96);
+      backdrop-filter: blur(16px);
+      padding: 1rem 1.25rem 1.25rem;
+      transform-origin: top right;
+      display: block;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(212,175,55,0.06);
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease, visibility 240ms ease, transform 240ms ease;
+      transform: translateY(-6px) scaleY(0.995);
+    }
+    .nav-links[data-open='true'] {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scaleY(1);
+    }
+    .nav-links ul {
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .nav-links a {
+      font-size: 1rem;
+    }
+    .cta-wrap {
+      margin-top: 0.8rem;
+    }
+  }
+  .nexora-navbar::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.25), transparent);
+    pointer-events: none;
+  }
+</style>

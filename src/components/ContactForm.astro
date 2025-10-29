@@ -1,0 +1,277 @@
+---
+interface Props {
+  services?: { label: string; value: string }[];
+  defaultService?: string | null;
+}
+
+const {
+  services = [
+    { label: "Banner Publicitario", value: "banner" },
+    { label: "LP Simple", value: "lp-simple" },
+    { label: "LP 3 Páginas", value: "lp-3pages" },
+    { label: "LP 5 Páginas", value: "lp-5pages" },
+    { label: "Sistemas", value: "sistemas" },
+    { label: "Logos", value: "logos" },
+    { label: "Brochure", value: "brochure" },
+    { label: "Revista", value: "revista" },
+    { label: "Menú", value: "menu" },
+    { label: "Presentaciones", value: "presentaciones" },
+    { label: "Códigos QR", value: "qr" },
+    { label: "Tarjetas", value: "tarjetas" },
+  ],
+  defaultService = null
+} = Astro.props;
+---
+<section class="contact-section" aria-labelledby="contact-heading">
+  <div class="container">
+    <h2 id="contact-heading" class="form-title">Solicita una cotización</h2>
+    <p class="form-subtitle">Cuéntanos sobre tu proyecto y te responderemos con una propuesta detallada.</p>
+
+    <form id="contact-form" class="contact-form" enctype="multipart/form-data" novalidate>
+      <div class="row">
+        <label class="field">
+          <span class="label">Nombre completo *</span>
+          <input type="text" name="name" id="name" required maxlength="100" placeholder="Ej. María Pérez" />
+        </label>
+
+        <label class="field">
+          <span class="label">Email *</span>
+          <input type="email" name="email" id="email" required placeholder="ejemplo@tudominio.com" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          <span class="label">Teléfono</span>
+          <input type="tel" name="phone" id="phone" placeholder="+505 1234 5678" />
+        </label>
+
+        <label class="field">
+          <span class="label">Empresa / Marca</span>
+          <input type="text" name="company" id="company" placeholder="Nombre de la empresa (opcional)" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field full">
+          <span class="label">Servicio de interés *</span>
+          <select name="service" id="service" required>
+            <option value="" disabled selected>Selecciona un servicio</option>
+            {services.map(s => (
+              <option value={s.value} selected={defaultService === s.value}>{s.label}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label class="field full">
+        <span class="label">Breve descripción del proyecto *</span>
+        <textarea name="message" id="message" rows="6" required placeholder="Describe objetivos, público, plazos y cualquier detalle relevante."></textarea>
+      </label>
+
+      <div class="row">
+        <label class="field">
+          <span class="label">Presupuesto estimado</span>
+          <select name="budget" id="budget">
+            <option value="">Sin definir</option>
+            <option value="under_500">$0 - $500</option>
+            <option value="500_1500">$500 - $1,500</option>
+            <option value="1500_5000">$1,500 - $5,000</option>
+            <option value="5000_plus">Más de $5,000</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Adjuntar archivo (opcional)</span>
+          <input type="file" name="attachment" id="attachment" accept=".pdf,.zip,.png,.jpg,.jpeg" />
+        </label>
+      </div>
+
+      <label class="honeypot" style="display:none;">
+        <span>Dejar en blanco</span>
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+      </label>
+
+      <label class="consent">
+        <input type="checkbox" name="consent" id="consent" required />
+        <span>Acepto que mis datos sean almacenados y contactados según la política de privacidad.</span>
+      </label>
+
+      <div class="actions">
+        <button type="submit" id="submit-btn" class="btn-primary">Enviar solicitud</button>
+        <button type="button" id="reset-btn" class="btn-ghost">Limpiar</button>
+      </div>
+
+      <div id="form-status" role="status" aria-live="polite" class="form-status" hidden></div>
+    </form>
+  </div>
+</section>
+
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --card: #141414;
+    --accent: #CFA356;
+    --text: #EFEFEF;
+    --subtle: #AAAAAA;
+  }
+
+  .contact-section {
+    background: var(--bg);
+    color: var(--text);
+    padding: 3rem 1.25rem;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .form-title {
+    color: var(--accent);
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+  .form-subtitle {
+    color: var(--subtle);
+    margin-bottom: 1.5rem;
+  }
+  .contact-form {
+    background: var(--card);
+    border: 1px solid #1f1f1f;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .field.full {
+    grid-column: 1 / -1;
+  }
+  .label {
+    font-size: 0.85rem;
+    color: var(--subtle);
+  }
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea, input[type="file"] {
+    background: transparent;
+    border: 1px solid #222;
+    color: var(--text);
+    padding: 0.7rem 0.9rem;
+    border-radius: 6px;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 3px rgba(207,163,86,0.08);
+    border-color: var(--accent);
+  }
+  .consent {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    color: var(--subtle);
+    font-size: 0.95rem;
+  }
+  .actions {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--subtle);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #232323;
+    cursor: pointer;
+  }
+  .form-status {
+    margin-top: 1rem;
+    color: var(--text);
+    padding: 0.75rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+  }
+  @media (max-width: 800px) {
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script type="module">
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
+  const resetBtn = document.getElementById('reset-btn');
+
+  function showStatus(message, opts = { success: false }) {
+    statusEl.hidden = false;
+    statusEl.textContent = message;
+    statusEl.style.background = opts.success ? 'rgba(36,163,90,0.06)' : 'rgba(200,60,60,0.04)';
+    statusEl.style.border = opts.success ? '1px solid rgba(36,163,90,0.12)' : '1px solid rgba(200,60,60,0.08)';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const required = Array.from(form.querySelectorAll('[required]'));
+    for (const el of required) {
+      if (!el.value.trim()) {
+        el.focus();
+        showStatus('Por favor completa los campos obligatorios (*) antes de enviar.');
+        return;
+      }
+    }
+
+    if (form.company_website && form.company_website.value) {
+      showStatus('Enviando...', { success: false });
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const fd = new FormData(form);
+
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        body: fd
+      });
+
+      if (!resp.ok) {
+        const err = await resp.text();
+        throw new Error(err || 'Error en el servidor');
+      }
+
+      const json = await resp.json();
+      showStatus(json.message || 'Tu solicitud fue enviada. Te contactaremos pronto.', { success: true });
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      showStatus('Ocurrió un error al enviar. Intenta de nuevo o escríbenos por email.', { success: false });
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar solicitud';
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+    statusEl.hidden = true;
+  });
+</script>

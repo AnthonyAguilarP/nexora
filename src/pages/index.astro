@@ -7,10 +7,14 @@ import MisionVision from '../components/MisionVision.astro';
 import NuestrosValores from '../components/NuestrosValores.astro';
 import Servicios from '../components/Servicios.astro';
 import Banner from '../components/Banner.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+import ServicesArticle from '../components/ServicesArticle.astro';
 
 ---
 
 <Layout>
+	<NavBar/>
 	<Header
       title="Tu Futuro Digital Comienza Aquí"
       subtitle="Creamos experiencias web impactantes y de alto rendimiento para tu negocio."
@@ -32,9 +36,11 @@ import Banner from '../components/Banner.astro';
 	  subtitle="Soluciones Digitales a la Medida de tu Éxito"
 	/>
 	<Banner
-		message="Descubre nuestra nueva línea de servicios premium para el Q4. ¡La excelencia te espera!"
-		linkText="Solicitar Acceso"
-		linkUrl="/contacto-premium"
+		message="Descubre nuestra nueva línea de servicios. ¡La excelencia te espera!"
+		linkText="Averiguar mas"
+		linkUrl="/contacto"
 		type="accent"
 	/>
+	
+	<Footer/>
 </Layout>

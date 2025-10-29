@@ -1,0 +1,202 @@
+---
+import ServiceDetail from './Servicio.astro';
+import Banner from '../assets/banner.png';
+import Lps from '../assets/lps.jpg';
+import Lp3 from '../assets/lp3.jpg';
+import Lp5 from '../assets/lp5.jpeg';
+import sis from '../assets/sis.jpg'
+import logo from '../assets/logo.png'
+import brochure from '../assets/brochure.png';
+import revista from '../assets/revista.png';
+import menu from '../assets/menu.jpg';
+import dia from '../assets/dia.png';
+import qr from '../assets/qr.jpg';
+import card from '../assets/card.png'
+
+const servicesFromPdf = [
+  {
+    title: "Banner Publicitario",
+    subtitle: "Impacto Visual Inmediato",
+    description: `Un banner es un anuncio gráfico (estático o animado) diseñado para captar atención y conducir a una acción específica (clic, registro o compra). Ideal para campañas y promociones con foco en conversión.`,
+    image: Banner.src,
+    features: [
+      { title: "Objetivo", description: "Captar la atención rápida y dirigir al usuario hacia una acción concreta." },
+      { title: "Beneficios", description: "Aumentan el tráfico web, refuerzan identidad de marca y facilitan promociones." },
+      { title: "Formato", description: "Está disponible en versiones estáticas y animadas, optimizadas para web y redes." },
+      { title: "Precio", description: "$14.99"}
+    ],
+    cta: { label: "Solicitar Banner", href: "/contacto" }
+  },
+
+  {
+    title: "Landing Page — LP Simple",
+    subtitle: "Página enfocada en conversión",
+    description: `Landing page compacta y enfocada que presenta información relevante en una sola pantalla o mediante scroll vertical. Ideal para campañas puntuales con claridad y velocidad.`,
+    image: Lps.src,
+    features: [
+      { title: "Diseño", description: "Enfoque en un mensaje claro y llamado a la acción prominente." },
+      { title: "Rendimiento", description: "Carga rápida y experiencia fluida para maximizar conversiones." },
+      { title: "Estructura", description: "Contenido estructurado para guiar al usuario hacia la acción." },
+      { title: "Precio", description: "$359.99"}
+    ],
+    cta: { label: "Crear LP Simple", href: "/contacto" }
+  },
+
+  {
+    title: "Landing Page — 3 Páginas",
+    subtitle: "Más espacio para contar la historia",
+    description: `Estructura de tres páginas conectadas para organizar contenido complejo, guiar la experiencia y mejorar claridad. Recomendada cuando se necesita separar secciones clave (producto, beneficios, pruebas).`,
+    image: Lp3.src,
+    features: [
+      { title: "Organización", description: "Mejor separación de contenido por áreas temáticas." },
+      { title: "Experiencia guiada", description: "Navegación clara y flujo de conversión mejorado." },
+      { title: "SEO", description: "Más oportunidades para optimizar palabras clave y contenidos." },
+      { title: "Precio", description: "$449.99"}
+    ],
+    cta: { label: "Solicitar LP 3 Páginas", href: "/contacto" }
+  },
+
+  {
+    title: "Landing Page — 5 Páginas",
+    subtitle: "Profundidad informativa y segmentación",
+    description: `Estructura extensa de cinco páginas interconectadas para campañas complejas que requieren segmentación, múltiples productos o niveles de información y mejor rendimiento SEO.`,
+    image: Lp5.src,
+    features: [
+      { title: "Segmentación", description: "Permite secciones dedicadas por audiencia o producto." },
+      { title: "Profundidad", description: "Mayor espacio para detalles, FAQ y pruebas sociales." },
+      { title: "SEO & Conversión", description: "Optimización avanzada y experiencia más guiada." },
+      { title: "Precio", description: "$539.99"}
+    ],
+    cta: { label: "Solicitar LP 5 Páginas", href: "/contacto" }
+  },
+
+  {
+    title: "Sistemas",
+    subtitle: "Soluciones organizadas y eficientes",
+    description: `Diseño e implementación de sistemas (conjunto de elementos interrelacionados) para ordenar procesos, reducir errores y aumentar productividad. Enfoque en coordinación, control y adaptabilidad.`,
+    image: sis.src,
+    features: [
+      { title: "Objetivo", description: "Ordenar procesos y mejorar eficiencia operativa." },
+      { title: "Control", description: "Implementación de mecanismos de seguimiento y evaluación." },
+      { title: "Adaptabilidad", description: "Diseño escalable según crecimiento del negocio." }
+    ],
+    cta: { label: "Cotizar Sistema", href: "/contacto" }
+  },
+
+  {
+    title: "Logos",
+    subtitle: "Identidad visual que distingue",
+    description: `Diseño de logotipos versátiles que identifican y diferencian tu marca. El logo transmite valores, profesionalismo y permite reconocimiento inmediato en múltiples soportes.`,
+    image: logo.src,
+    features: [
+      { title: "Reconocimiento", description: "Diseños que facilitan identificación instantánea." },
+      { title: "Versatilidad", description: "Formatos y versiones para web, print y social." },
+      { title: "Relevancia", description: "Alineado con identidad y público objetivo." },
+      { title: "Precio", description: "$19.99 (tarifa base indicada)."}
+    ],
+    cta: { label: "Diseñar Logo", href: "/contacto" }
+  },
+
+  {
+    title: "Brochure / Folleto",
+    subtitle: "Comunicación impresa o digital con estilo",
+    description: `Diseño de brochures para presentar productos, servicios o eventos con claridad y estética profesional. Sirven para persuadir y atraer al lector de forma directa.`,
+    image: brochure.src,
+    features: [
+      { title: "Diseño editorial", description: "Composición visual atractiva y legible." },
+      { title: "Contenido", description: "Texto estructurado para impactar y persuadir." },
+      { title: "Formatos", description: "Impreso y digital optimizados." },
+      { title: "Precio", description: "$9.99."}
+    ],
+    cta: { label: "Pedir Brochure", href: "/contacto" }
+  },
+
+  {
+    title: "Revista (Diseño Editorial)",
+    subtitle: "Publicaciones periódicas con identidad",
+    description: `Diseño editorial para revistas impresas o digitales: artículos, imágenes, entrevistas y reportajes. Foco en estética, consumo y segmentación de audiencia.`,
+    image: revista.src,
+    features: [
+      { title: "Difusión", description: "Potencia la difusión de ideas y la influencia cultural." },
+      { title: "Segmentación", description: "Dirigida a audiencias específicas." },
+      { title: "Precio", description: "$2.99 por página."}
+    ],
+    cta: { label: "Diseñar Revista", href: "/contacto" }
+  },
+
+  {
+    title: "Menú (Restaurantes y Cafés)",
+    subtitle: "Diseño que vende platos",
+    description: `Diseño de menús físicos o digitales que orientan al cliente y reflejan la identidad del negocio. Uso estratégico de colores y tipografía para estimular el apetito y las ventas.`,
+    image: menu.src,
+    features: [
+      { title: "Función", description: "Orienta al cliente y mejora la experiencia en el punto de venta." },
+      { title: "Ventas", description: "Diseño pensado para aumentar ticket promedio." },
+      { title: "Precio", description: "$16.99 (valor referencial)."}
+    ],
+    cta: { label: "Solicitar Menú", href: "/contacto" }
+  },
+
+  {
+    title: "Presentaciones (Slides)",
+    subtitle: "Comunica con impacto",
+    description: `Diseño de presentaciones visuales que combinan texto, imágenes y gráficos para sostener una narrativa clara y de impacto ante audiencias variadas.`,
+    image: dia.src,
+    features: [
+      { title: "Claridad", description: "Soporte visual que apoya la narrativa." },
+      { title: "Impacto", description: "Combinación de diseño y storytelling." },
+      { title: "Precio", description: "$0.99 por diapositiva."}
+    ],
+    cta: { label: "Solicitar Presentación", href: "/contacto" }
+  },
+
+  {
+    title: "Códigos QR",
+    subtitle: "Acceso rápido y versátil",
+    description: `Generación y diseño de códigos QR para marketing, inventario y acceso a información. Solución rápida y adaptable a múltiples canales.`,
+    image: qr.src,
+    features: [
+      { title: "Versatilidad", description: "Usos en campañas, menús, promociones y más." },
+      { title: "Rapidez", description: "Acceso inmediato con dispositivos móviles." },
+      { title: "Precio", description: "$1.99."}
+    ],
+    cta: { label: "Generar QR", href: "/contacto" }
+  },
+
+  {
+    title: "Tarjetas (Cards)",
+    subtitle: "Identidad compacta y profesional",
+    description: `Diseño de tarjetas (físicas o digitales) orientadas a identificación, estilo y funcionalidad. Perfectas para redes de contacto y presentación profesional.`,
+    image: card.src,
+    features: [
+      { title: "Función", description: "Comodidad, estilo y comunicación rápida." },
+      { title: "Uso", description: "Tarjetas de presentación, acceso y fidelización." },
+      { title: "Precio", description: "$7.99 (tarifa referencial)."}
+    ],
+    cta: { label: "Pedir Tarjetas", href: "/contacto" }
+  }
+];
+
+---
+<section class="services-from-pdf">
+  {servicesFromPdf.map((svc) => (
+    <ServiceDetail
+      title={svc.title}
+      subtitle={svc.subtitle}
+      description={svc.description}
+      image={svc.image}
+      features={svc.features}
+      cta={svc.cta}
+    />
+  ))}
+</section>
+
+<style>
+  .services-from-pdf {
+    background: var(--color-bg-primary, #0A0A0A);
+    padding: 2rem 1rem 6rem;
+  }
+  .services-from-pdf > * + * {
+    margin-top: 3.5rem;
+  }
+</style>

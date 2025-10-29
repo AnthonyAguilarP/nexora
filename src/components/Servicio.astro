@@ -1,0 +1,194 @@
+---
+interface FeatureItem {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  image?: string;
+  features?: FeatureItem[];
+  cta?: { label: string; href: string };
+}
+
+const {
+  title,
+  subtitle = "Nuestro Enfoque",
+  description,
+  image = "/src/assets/service-detail.webp",
+  features = [
+    {
+      icon: "mdi:palette-outline",
+      title: "Diseño Personalizado",
+      description: "Cada elemento visual es cuidadosamente diseñado para reflejar la identidad exclusiva de su marca."
+    },
+    {
+      icon: "mdi:rocket-launch-outline",
+      title: "Rendimiento Premium",
+      description: "Optimizamos su presencia digital para lograr una velocidad y rendimiento sin compromisos."
+    },
+    {
+      icon: "mdi:account-multiple-outline",
+      title: "Experiencia Centrada en el Usuario",
+      description: "Diseñamos experiencias digitales que cautivan y conectan emocionalmente con su público objetivo."
+    },
+  ],
+  cta = { label: "Comenzar Proyecto", href: "/contacto" }
+} = Astro.props;
+---
+
+<section class="service-detail-section">
+  <div class="detail-content">
+    <div class="detail-text">
+      <p class="detail-subtitle">{subtitle}</p>
+      <h1 class="detail-title">{title}</h1>
+      <p class="detail-description">{description}</p>
+
+      <div class="feature-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            {feature.icon && (
+              <iconify-icon icon={feature.icon} class="feature-icon"></iconify-icon>
+            )}
+            <div>
+              <h3 class="feature-title">{feature.title}</h3>
+              <p class="feature-description">{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {cta && (
+        <a href={cta.href} class="cta-button">{cta.label}</a>
+      )}
+    </div>
+
+    <div class="detail-image">
+      <img src={image} alt={title} loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-bg-primary: #0A0A0A; 
+    --color-accent: #CFA356;    
+    --color-text-light: #EFEFEF;
+    --color-text-subtle: #AAAAAA;
+  }
+
+  .service-detail-section {
+    background: var(--color-bg-primary);
+    color: var(--color-text-light);
+    padding: 6rem 1.5rem;
+  }
+
+  .detail-content {
+    display: grid;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .detail-subtitle {
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-description {
+    color: var(--color-text-subtle);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .feature-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .feature-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid #1f1f1f;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    color: var(--color-accent);
+    font-size: 1.8rem;
+  }
+
+  .feature-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-description {
+    color: var(--color-text-subtle);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #000;
+    font-weight: 600;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background: #d8b05f;
+    transform: translateY(-3px);
+  }
+
+  .detail-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+
+  @media (min-width: 900px) {
+    .detail-content {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .detail-title {
+      font-size: 3.5rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
