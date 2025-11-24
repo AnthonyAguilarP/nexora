@@ -1,14 +1,31 @@
 ---
 import IntroAnimation from "../components/IntroAnimation.astro"
+export let title = 'Nexora'
+export let description = 'Nexora - Servicios profesionales. Contacto y detalles de nuestros servicios.'
+export let canonical = 'https://www.nexoraorg.com/'
 ---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="robots" content="index, follow" />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<link rel="canonical" href={canonical} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 	</head>
 	<body>
 		<IntroAnimation client:load />

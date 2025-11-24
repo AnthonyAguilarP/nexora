@@ -1,0 +1,10 @@
+# robots.txt for Nexora
+# Replace the Sitemap URL below with your real site URL (e.g. https://tudominio.com/sitemap.xml)
+
+User-agent: *
+Allow: /
+
+# Point to the sitemap (use absolute URL for best results)
+Sitemap: https://www.nexoraorg.com/sitemap.xml
+
+# End of file
