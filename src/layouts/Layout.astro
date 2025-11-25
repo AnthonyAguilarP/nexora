@@ -27,6 +27,17 @@ export let canonical = 'https://www.nexoraorg.com/'
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 	</head>
+		
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-H0PLVLD6H9"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'G-H0PLVLD6H9');
+	</script>
+
 	<body>
 		<IntroAnimation client:load />
 		<slot />
